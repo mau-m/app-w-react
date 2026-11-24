@@ -1,0 +1,14 @@
+services:
+  react_app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: react_contenedor_web
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+    ports:
+      - "3001:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules

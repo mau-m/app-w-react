@@ -107,6 +107,7 @@ const Login: FC = () => {
             <input
             type="email"
             name="email"
+            required
             className="campo"
             value={email}
             onChange={handleChange}
@@ -117,6 +118,7 @@ const Login: FC = () => {
             <input
             type="password"
             name="password"
+            required
             className="campo"
             value={password}
             onChange={handleChange}

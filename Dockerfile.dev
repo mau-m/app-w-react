@@ -1,0 +1,17 @@
+# Imagen base con Node 20
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copia manifiestos e instala dependencias
+COPY package.json package-lock.json* ./
+RUN npm install --legacy-peer-deps
+
+# Copia el resto del proyecto
+COPY . .
+
+# Puerto del dev server de Create React App
+EXPOSE 3000
+
+# Arranca el dev server
+CMD ["npm", "start"]
