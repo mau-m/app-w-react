@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Suspense } from 'react';
 import './App.css';
+import './i18';
+import { useTranslation } from 'react-i18next';
+import ButtonGallery from './components/ButtonGallery';
 
-function App() {
+// Definimos el tipo de idioma permitido (opcional pero recomendado)
+type Language = 'es' | 'en';
+
+function Welcome() {
+  // Tipamos el hook de traducción
+  const { i18n } = useTranslation();
+
+
+  // Tipamos el parámetro del idioma
+  const changeLanguage = (lng: Language): void => {
+    i18n.changeLanguage(lng);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div>
+          <div className="language-selector">
+            <button onClick={() => changeLanguage('es')}>Español</button>
+            <button onClick={() => changeLanguage('en')}>English</button>
+          </div>
+
+          {/* Galería de botones */}
+          <ButtonGallery />
+        </div>
       </header>
     </div>
   );
 }
 
-export default App;
+
+function App(){
+  return (
+    // Suspense se usa por si las traducciones tardan en cargar
+    <Suspense fallback={<div>Cargando...</div>}>
+      <Welcome />
+    </Suspense>
+  );
+}
+
+export default App; 

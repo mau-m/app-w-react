@@ -1,0 +1,27 @@
+{
+  "title": "Bienvenido {{name}}",
+  "menu": {
+    "accountTitle": "Mi cuenta",
+    "registerTitle": "Registro",
+    "notificationsTitle": "Notificaciones",
+    "chatbotTitle": "ChatBot",
+    "privacyTitle": "Aviso de privacidad",
+    "logoutTitle": "Cerrar sesión"
+  },
+  
+  "registro": {
+    "title": "Regístrate",
+    "subtitle": "Ingresa tus datos",
+    "nameLabel": "Nombre",
+    "firstLastnameLabel": "Primer apellido",
+    "secondLastnameLabel": "Segundo apellido",
+    "birthdateLabel": "Fecha de nacimiento",
+    "dateFormat": "DD/MM/AAAA",
+    "emailLabel": "Correo electrónico",
+    "passwordLabel": "Contraseña",
+    "requiredFieldsNote": "Todos los campos son obligatorios",
+    "submitButton": "Continuar",
+    "backButton": "Volver al inicio"
+   
+  }
+}

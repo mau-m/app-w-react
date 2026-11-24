@@ -1,0 +1,24 @@
+{
+  "menu": {
+    "accountTitle": "My account",
+    "registerTitle": "Register",
+    "notificationsTitle": "Notifications",
+    "chatbotTitle": "ChatBot",
+    "privacyTitle": "Privacy policy",
+    "logoutTitle": "Logout"
+  },
+  "registro": {
+    "title": "Register",
+    "subtitle": "Enter your information",
+    "nameLabel": "Name",
+    "firstLastnameLabel": "First surname",
+    "secondLastnameLabel": "Second surname",
+    "birthdateLabel": "Date of birth",
+    "dateFormat": "MM/DD/YYYY",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "submitButton": "Continue",
+    "backButton": "Back to home"
+  
+  }
+}
