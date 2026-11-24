@@ -51,5 +51,7 @@
     "Street":"Calle",
     "Exteriornumber":"Número exterior ",
     "Interiornumber":"Número Interior",
-    "Reference ":"Referencia"
+    "Reference":"Referencia",
+    "Registrando...": "Registrando...",
+    "menu": {"accountTitle": "Mi cuenta", "registerTitle": "Registro", "notificationsTitle": "Notificaciones", "chatbotTitle": "Chatbot", "privacyTitle": "Aviso de privacidad", "logoutTitle": "Cerrar sesión"}
   }

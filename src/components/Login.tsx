@@ -1,41 +1,92 @@
-import React, { useState, FC } from 'react';
+import React, { useState, FC, FormEvent, ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getSvgUrl } from './utils';
-import Botones from './Botones';
+//import Botones from './Botones';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
+import axios, {AxiosResponse} from 'axios';
+
+const API_BASE_URL =
+  process.env.REACT_APP_API_URL || 'http://developer.jquiroz.net:3005';
+
+/**
+ * Interfaz que describe la respuesta del login.
+ * Contiene tokens de acceso y refresco.
+ */
+interface LoginResponse {
+  accessToken: string;
+  refreshToken: string;
+}
 
 /**
  * Componente Login.
- * Permite al usuario ingresar sus credenciales para autenticarse en la aplicación.
- * Maneja estado local para email, contraseña y estado de sesión.
+ * Permite al usuario autenticarse contra la API y guardar sus tokens.
  */
 const Login: FC = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  
+  // Estados tipados
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  
+
   /**
-   * Estado que indica si el usuario ha iniciado sesión.
-   * Actualmente no se utiliza en la lógica, pero puede servir para control futuro.
+   * Actualiza el estado de email o contraseña según el campo modificado.
+   * @param event - Evento de cambio del input.
    */
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+
+    if (name === 'email') {
+      setEmail(value);
+    } else if (name === 'password') {
+      setPassword(value);
+    }
+  };
 
   
   /**
    * Maneja el envío del formulario de login.
-   * Previene el comportamiento por defecto, registra los datos
-   * y redirige al usuario a la pantalla principal.
+   * Realiza llamada POST a la API y guarda tokens en localStorage si la respuesta es válida.
    * 
-   * @param e - Evento de envío del formulario.
+   * @param e - Evento de envío del formulario
    */
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log('Login:', email, password);
-    navigate('/botones');
+
+    try {
+      const user = {
+        email: email,
+        password: password
+      };
+       // Llamada POST a la API de login
+       const response: AxiosResponse<LoginResponse> = await axios.post(
+        `${API_BASE_URL}/api/users/login`,
+        user,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            accept: '*/*'
+          }
+        }
+      );
+
+      
+       // Verifica si la respuesta es correcta y guarda tokens
+      if (response.status === 200 && response.data.accessToken) {
+        localStorage.setItem('accessToken', response.data.accessToken);
+        localStorage.setItem('refreshToken', response.data.refreshToken);
+         // Navega a la pantalla principal de botones
+        navigate('/botones');
+      } else {
+        throw new Error('Respuesta inválida del servidor');
+      }
+
+    } catch (error) {
+      console.error('Error en el login:', error);
+      alert('Error al iniciar sesión. Intenta nuevamente.');
+    }
   };
 
   return (
@@ -54,20 +105,22 @@ const Login: FC = () => {
           <div className="grupo">
             <label>{t('email')}</label>
             <input
-              type="email"
-              className="campo"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+            type="email"
+            name="email"
+            className="campo"
+            value={email}
+            onChange={handleChange}
+          />
           </div>
           <div className="grupo">
             <label>{t('password')}</label>
             <input
-              type="password"
-              className="campo"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            type="password"
+            name="password"
+            className="campo"
+            value={password}
+            onChange={handleChange}
+          />
           </div>
           <div className="opciones">
             <label className="recordar">

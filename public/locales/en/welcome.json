@@ -51,6 +51,7 @@
   "Street":"Street",
   "Exteriornumber":"Exterior number ",
   "Interiornumber":"Interior number",
-  "Reference ":"Reference"
-
-}
+  "Reference":"Reference",
+    "Registrando...": "Registering...",
+    "menu": {"accountTitle": "My account", "registerTitle": "Register", "notificationsTitle": "Notifications", "chatbotTitle": "Chatbot", "privacyTitle": "Privacy notice", "logoutTitle": "Log out"}
+  }

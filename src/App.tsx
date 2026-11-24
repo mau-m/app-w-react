@@ -16,9 +16,10 @@ import Fotografia from './components/Fotografia';
  * Configura el enrutamiento global utilizando React Router,
  * definiendo las rutas disponibles y los componentes asociados.
  */
+
 const App: React.FC = () => {
   // i18n no se usa, pero lo dejamos por si lo necesitas después
-  //const { i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   return (
     <Router>
