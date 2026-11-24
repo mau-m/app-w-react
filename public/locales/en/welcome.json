@@ -1,24 +1,56 @@
 {
-  "menu": {
-    "accountTitle": "My account",
-    "registerTitle": "Register",
-    "notificationsTitle": "Notifications",
-    "chatbotTitle": "ChatBot",
-    "privacyTitle": "Privacy policy",
-    "logoutTitle": "Logout"
-  },
-  "registro": {
-    "title": "Register",
-    "subtitle": "Enter your information",
-    "nameLabel": "Name",
-    "firstLastnameLabel": "First surname",
-    "secondLastnameLabel": "Second surname",
-    "birthdateLabel": "Date of birth",
-    "dateFormat": "MM/DD/YYYY",
-    "emailLabel": "Email",
-    "passwordLabel": "Password",
-    "submitButton": "Continue",
-    "backButton": "Back to home"
+  "title": "Application Title",
+  "subtitle": "Login",
+  "email": "Email",
+  "password": "Password",
+  "remember": "Remember me",
+  "login": "Sign In",
+  "forgot": "Forgot your password?",
+
+  "accountTitle": "My account",
+  "registerTitle": "Register",
+  "productsTitle": "Products",
+  "pendingTitle": "Pending",
+  "logoutTitle": "Logout",
   
-  }
+  "personalTitle": "Personal",
+  "accountTitlee": "Account",
+  "addressTitle": "Address",
+  "pictureTitle": "Picture",
+
+  "fulanitoTitle": "Fulanito Torres Torres",
+
+  "name": "Name",
+  "firstsurname": "First surname",
+  "secondsurname": "Second surname",
+  "Date of Birth": "Date of Birth",
+  "Gener": "Gener",
+  "Nationality": "Nationality",
+
+  "RegistrarBoton": "Registrer",
+
+  "PictureTitle": "Photography",
+  "TextOne":"Take or upload a photograph with the following characteristics:",
+  "TextTwo": "White background",
+  "TextThree": "Forehead and ears uncovered",
+  "TextFour": "No glasses or caps",
+  "TextFive": "No filters",
+  "TextSix": "Must not be a selfie",
+  "ContinueButton": "Continue",
+
+  "TelephoneText": "Telephone ",
+  "UserName":"User name",
+  "User": "User",
+  "load or occupation": "Cload or occupation",
+  "rol": "Rol",
+
+  "postcode":"Post Code",
+  "estate": "Estate",
+  "CAText":"City or borough",
+  "ColText":"Neighborhood",
+  "Street":"Street",
+  "Exteriornumber":"Exterior number ",
+  "Interiornumber":"Interior number",
+  "Reference ":"Reference"
+
 }

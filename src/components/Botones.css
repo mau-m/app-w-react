@@ -1,0 +1,71 @@
+
+/*CONTENEDOR PRINCIPAL DE BOTONES*/
+
+.buttons-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /*CREA DOS COLUMANES DEL MISMO TAMANO*/
+  width: 130%; /*Tamaño del contenedor*/
+  justify-items: center; 
+  margin-top: -2px; 
+  padding:  130px 23px;
+  background-color: white; /*Fondo blanco*/
+  border-radius: 20px; /*Borde del contenedor*/
+  position: relative; /* Permite mover el contenedor */
+  left:10px; /* Izquierda (-) / Derecha (+) */
+  box-sizing: border-box; /* Evita que el padding afecte el ancho */
+ 
+}
+
+/*CONTENEDOR INDIVIDUAL PARA CADA BOTON Y SU ETIQUETA */
+.button-container {
+  display: flex;
+  flex-direction: column; /*Organiza los elementos de forma vertical*/
+  align-items: center;
+  width: 100px;
+}
+
+/* ESTILO PARA LOS BOTONES SVG */
+.svg-button {
+  background-color: #e9e5e3;
+  border: none;
+  border-radius: 12px;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: transform 0.2s;
+  margin-top: 10px;
+
+}
+
+/*DIMENSIONES DE LOS ICONOS*/
+.button-icon {
+  width: 36px;
+  height: 40px;
+}
+
+/*TEXTO QUE SE ENCUENTRA DEBAJO DE LOS BOTONES*/
+.button-label {
+  color: #6f263b;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 5px;
+  font-weight: 400;
+}
+
+
+.logo-container {
+  margin-bottom: 0px;
+  margin-top: -25px;
+  text-align: center;
+  width: 100%;
+}
+
+.logo-container {
+  position: relative;
+  transform: translate(55.3px, 15px);
+}

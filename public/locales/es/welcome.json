@@ -1,27 +1,55 @@
 {
-  "title": "Bienvenido {{name}}",
-  "menu": {
+    "title":"Titulo de la aplicación",
+    "subtitle":"Inicio de sesión",
+    "email": "Correo electronico",
+    "password": "Contraseña",
+    "remember":"Recuerdame",
+    "login":"Acceder",
+    "forgot":"¿Olvidaste tu contraseña?",
+
     "accountTitle": "Mi cuenta",
     "registerTitle": "Registro",
-    "notificationsTitle": "Notificaciones",
-    "chatbotTitle": "ChatBot",
-    "privacyTitle": "Aviso de privacidad",
-    "logoutTitle": "Cerrar sesión"
-  },
-  
-  "registro": {
-    "title": "Regístrate",
-    "subtitle": "Ingresa tus datos",
-    "nameLabel": "Nombre",
-    "firstLastnameLabel": "Primer apellido",
-    "secondLastnameLabel": "Segundo apellido",
-    "birthdateLabel": "Fecha de nacimiento",
-    "dateFormat": "DD/MM/AAAA",
-    "emailLabel": "Correo electrónico",
-    "passwordLabel": "Contraseña",
-    "requiredFieldsNote": "Todos los campos son obligatorios",
-    "submitButton": "Continuar",
-    "backButton": "Volver al inicio"
-   
+    "productsTitle": "Productos",
+    "pendingTitle": "Pendientes",
+    "logoutTitle": "Cerrar sesión",
+
+    "personalTitle": "Personal",
+    "accountTitlee": "Cuenta",
+    "addressTitle": "Direccion",
+    "pictureTitle": "Fotografia",
+
+    "fulanitoTitle":"Fulanito Torres Torres",
+
+    "name": "Nombre",
+    "firstsurname": "Primer apellido",
+    "secondsurname": "Segundo apellido",
+    "Date of Birth":"Fecha de nacimiento",
+    "Gener" : "Genero",
+    "Nationality": "Nacionalidad",
+
+    "RegistrarBoton": "Registrar",
+
+    "PictureTitle": "Fotografía",
+    "TextOne":"Tomar o subir una fotografia con las siguientes características:",
+    "TextTwo": "Fondo blanco",
+    "TextThree": "Frente u orejas descubiertas",
+    "TextFour": "Sin lentes y gorra",
+    "TextFive": "Sin filtros",
+    "TextSix": "No debe ser una selfie",
+    "ContinueButton": "Continuar",
+
+    "TelephoneText": "Telefono ",
+    "UserName":"Nombre de usuario",
+    "User": "Usuario",
+    "load or occupation": "Carga u ocupacion",
+    "rol": "Rol",
+
+    "postcode":"Codigo postal",
+    "estate": "Estado",
+    "CAText":"Ciudad o alcaldía",
+    "ColText":"Colonia",
+    "Street":"Calle",
+    "Exteriornumber":"Número exterior ",
+    "Interiornumber":"Número Interior",
+    "Reference ":"Referencia"
   }
-}

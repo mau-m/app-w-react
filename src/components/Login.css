@@ -1,0 +1,134 @@
+/* ESTILOS GLOBALES  */
+
+body {
+
+    background-color: #6f263b; /* Fondo */
+    display: flex; /* Activa el modelo de caja flexible (Flexbox) */
+    justify-content: center; /* Centra horizontalmente los elementos hijos */
+    align-items: center; /* Centra verticalmente los elementos hijos */
+    min-height: 100vh; /* Establece la altura mínima  */
+    font-family: 'Roboto', sans-serif; /* Tipografía principal */
+}
+
+/* CONTENEDOR PRINCIPAL DE LA PÁGINA DE LOGIN */
+.pagina-login {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 170px; /* Baja más el contenido (Subiendo el valor) */
+}
+
+/* PRIMER LOGO (LOGO PRINCIPAL) */
+
+.logo-1 {
+    position: absolute;
+    top: 10px; /* Mover los logos */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    pointer-events: none;
+    
+}
+
+/* SEGUNDO LOGO (LOGO DE USUARIO) */
+.logo-2 {
+    position: absolute;
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* ESTILOS PARA LA IMAGEN DEL LOGO PRINCIPAL */
+
+.logo-principal {
+    width: 200px;
+    height: auto;
+}
+
+/* CONTENEDOR DEL FORMULARIO DE LOGIN */
+.inicio {
+    background-color: white;
+    border-radius: 20px;
+    padding: 25px;
+    width: 100%;
+    max-width: 300px;
+    position: relative;
+    z-index: 1;
+}
+
+/* TÍTULO PRINCIPAL */
+
+.inicio h1 {
+    color: #333;
+    font-size: 35px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* SUBTÍTULO (H2) DENTRO DEL FORMULARIO */
+
+.inicio h2 {
+    color: #555;
+    font-size: 30px;
+    margin-top: 0;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+/* FORMULARIO Y CONTROLES */
+.grupo {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.grupo label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.campo {
+    width: 100%;
+    height: 35px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* CONTENEDOR DE OPCIONES (CHECKBOX) */
+
+.opciones {
+    display: block;
+    margin-bottom: 5px; 
+    font-size: 14px;
+}
+
+/* BOTÓN DE ENVÍO DEL FORMULARIO */
+
+.boton {
+    background-color: #B98C57;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    width: 50%;
+    min-width: 120px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block; 
+    margin: 15px auto 0; 
+}
+
+/* ENLACE "OLVIDÉ MI CONTRASEÑA" */
+
+.olvidar {
+    display: block;
+    text-align: center;
+    margin-top: 20px; 
+}

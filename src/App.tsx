@@ -1,47 +1,40 @@
-import React, { Suspense } from 'react';
 import './App.css';
-import './i18';
 import { useTranslation } from 'react-i18next';
-import ButtonGallery from './components/ButtonGallery';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-// Definimos el tipo de idioma permitido (opcional pero recomendado)
-type Language = 'es' | 'en';
+import Login from './components/Login';
+import Botones from './components/Botones';
+import Registro from './components/Registro';
+import Personal from './components/Personal';
+import Cuenta from './components/Cuenta';
+import Direccion from './components/Direccion';
+import Fotografia from './components/Fotografia';
 
-function Welcome() {
-  // Tipamos el hook de traducción
-  const { i18n } = useTranslation();
-
-
-  // Tipamos el parámetro del idioma
-  const changeLanguage = (lng: Language): void => {
-    i18n.changeLanguage(lng);
-  };
+/**
+ * Componente principal de la aplicación.
+ * 
+ * Configura el enrutamiento global utilizando React Router,
+ * definiendo las rutas disponibles y los componentes asociados.
+ */
+const App: React.FC = () => {
+  // i18n no se usa, pero lo dejamos por si lo necesitas después
+  //const { i18n } = useTranslation();
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <div>
-          <div className="language-selector">
-            <button onClick={() => changeLanguage('es')}>Español</button>
-            <button onClick={() => changeLanguage('en')}>English</button>
-          </div>
-
-          {/* Galería de botones */}
-          <ButtonGallery />
-        </div>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/botones" element={<Botones />} />
+          <Route path="/registro" element={<Registro />} />
+          <Route path="/registro/personal" element={<Personal />} />
+          <Route path="/registro/cuenta" element={<Cuenta />} />
+          <Route path="/registro/direccion" element={<Direccion />} />
+          <Route path="/registro/fotografia" element={<Fotografia />} />
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
 
-
-function App(){
-  return (
-    // Suspense se usa por si las traducciones tardan en cargar
-    <Suspense fallback={<div>Cargando...</div>}>
-      <Welcome />
-    </Suspense>
-  );
-}
-
-export default App; 
+export default App;

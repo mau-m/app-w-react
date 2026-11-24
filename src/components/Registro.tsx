@@ -1,171 +1,165 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import Button from './Button';
+import { getSvgUrl } from './utils';
 import './Registro.css';
 
 /**
  * Props del componente Registro.
- * @param onBack - Función opcional para volver a la pantalla anterior.
+ * @param onBack - Función opcional para regresar a la pantalla anterior.
  */
-type RegistroProps = {
-  onBack?: () => void;
-};
+interface RegistroProps {
+  onBack?: () => void; // Función opcional para volver atrás
+}
+
 
 /**
- * Estructura de los datos del formulario de registro.
+ * Estado que representa el progreso de cada formulario.
+ * Cada propiedad indica si la sección correspondiente está completa.
+ * 
+ * @property personal - Estado del formulario de datos personales.
+ * @property cuenta - Estado del formulario de cuenta.
+ * @property direccion - Estado del formulario de dirección.
+ * @property fotografia - Estado del formulario de fotografía.
  */
-type FormValues = {
-  name: string;
-  first_lastname: string;
-  second_lastname: string;
-  birthdate: string;
-  email: string;
-  password: string;
-};
+interface CompletedForms {
+  personal: boolean;
+  cuenta: boolean;
+  direccion: boolean;
+  fotografia: boolean;
+}
 
 /**
- * Componente de formulario para registrar un nuevo usuario.
+ * Componente Registro.
+ * Actúa como panel principal del flujo de registro,
+ * mostrando el progreso de cada sección y permitiendo navegación.
  */
-function Registro({ onBack }: RegistroProps) {
+const Registro: React.FC<RegistroProps> = ({ onBack }) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
-   /**
-   * Estado que almacena los valores del formulario.
-   */
-  const [values, setValues] = useState<FormValues>({
-    name: "",
-    first_lastname: "",
-    second_lastname: "",
-    birthdate: "",
-    email: "",
-    password: ""
+  const [completedForms, setCompletedForms] = useState<CompletedForms>({
+    personal: false,
+    cuenta: false,
+    direccion: false,
+    fotografia: false
   });
 
   /**
-   * Actualiza el estado cuando cambia un campo del formulario.
+   * Verifica si un formulario está completo.
+   * Evalúa que todos los campos requeridos tengan valores válidos.
+   * 
+   * @param formData - Objeto con los datos del formulario.
+   * @param requiredFields - Lista de campos obligatorios.
+   * @returns true si todos los campos requeridos están completos.
    */
-  const handleInputChange = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    const { name, value } = event.target;
-    setValues(prev => ({ ...prev, [name]: value }));
+  const isFormComplete = (
+    formData: Record<string, any> | null,
+    requiredFields: string[]
+  ): boolean => {
+    if (!formData) return false;
+
+    return requiredFields.every(field => {
+      const value = formData[field];
+      return value !== undefined && value !== null && value.toString().trim() !== "";
+    });
   };
 
   /**
-   * Maneja el envío del formulario de registro.
+   * Efecto que verifica el estado de los formularios almacenados en localStorage.
+   * Se ejecuta al montar el componente y cuando se dispara el evento 'storageUpdate'.
    */
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  useEffect(() => {
+    const checkFormCompletion = () => {
+      try {
+        const personalData = JSON.parse(localStorage.getItem('personalFormData') || 'null');
+        const cuentaData = JSON.parse(localStorage.getItem('cuentaFormData') || 'null');
+        const direccionData = JSON.parse(localStorage.getItem('direccionFormData') || 'null');
+
+        setCompletedForms({
+          personal: isFormComplete(personalData, ['name', 'firstsurname', 'dateOfBirth', 'gender', 'nationality']),
+          cuenta: isFormComplete(cuentaData, ['telephone', 'email', 'username', 'user', 'password', 'role']),
+          direccion: isFormComplete(direccionData, ['postcode', 'estate', 'CAText', 'ColText', 'Street', 'Exteriornumber']),
+          fotografia: completedForms.fotografia // Se mantiene igual
+        });
+      } catch (error) {
+        console.error("Error al verificar formularios:", error);
+      }
+    };
+
+    checkFormCompletion();
+    window.addEventListener('storageUpdate', checkFormCompletion);
+    return () => window.removeEventListener('storageUpdate', checkFormCompletion);
+  }, []);
+
+  const handleButtonClick = (sectionName: keyof CompletedForms) => {
+    navigate(`/registro/${sectionName}`);
   };
 
-   /**
-   * Regresa a la pantalla anterior.
-   */
-  const handleBack = () => onBack ? onBack() : window.history.back();
-
   return (
-    <div className="registro-container">
-      <h2>{t('registro.title')}</h2>
-      <p className="subtitle">{t('registro.subtitle')}</p>
+    <div className="registro-panel">
+      <div className="logo-container"></div>
 
-      <form onSubmit={handleSubmit} className="registro-form">
-        {/* Campo Nombre */}
-        <div className="form-group">
-          <label htmlFor="name">{t('registro.nameLabel')}:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={values.name}
-            onChange={handleInputChange}
-            className="form-input"
-            required
-          />
+      <div className="registro-opciones">
+        <div className="SCROLLBAR"></div>
+
+        {/* Círculos de progreso */}
+        <div className="circulos">
+          {Object.entries(completedForms).map(([key, completed]) => (
+            <div key={key} className={`circulo ${completed ? 'circulo-fuerte' : ''}`}>
+              {completed && (
+                <img
+                  src={getSvgUrl('paloma')}
+                  alt="Completado"
+                  className="icono-paloma"
+                />
+              )}
+            </div>
+          ))}
         </div>
 
-        {/* Campo Primer Apellido */}
-        <div className="form-group">
-          <label htmlFor="first_lastname">{t('registro.firstLastnameLabel')}:</label>
-          <input
-            type="text"
-            id="first_lastname"
-            name="first_lastname"
-            value={values.first_lastname}
-            onChange={handleInputChange}
-            className="form-input"
-            required
-          />
+        <img src={getSvgUrl('logo-5')} alt="Logo" className="logo" />
+        <h1>{t('registerTitle')}</h1>
+        <div className="titulo-con-logo">
+          <img src={getSvgUrl('Pantera')} alt="Logo" className="pantera-logo" />
+          <h2>{t('fulanitoTitle')}</h2>
         </div>
+        <div className="linea"></div>
 
-        {/* Campo Segundo Apellido */}
-        <div className="form-group">
-          <label htmlFor="second_lastname">{t('registro.secondLastnameLabel')}:</label>
-          <input
-            type="text"
-            id="second_lastname"
-            name="second_lastname"
-            value={values.second_lastname}
-            onChange={handleInputChange}
-            className="form-input"
-          />
-        </div>
+        <Button
+          iconName="Usuario"
+          labelKey={t('personalTitle')}
+          onClick={() => handleButtonClick('personal')}
+          className="registro-opcion"
+        />
+        <Button
+          iconName="Correo_electronico"
+          labelKey={t('accountTitlee')}
+          onClick={() => handleButtonClick('cuenta')}
+          className="registro-opcion"
+        />
+        <Button
+          iconName="add"
+          labelKey={t('addressTitle')}
+          onClick={() => handleButtonClick('direccion')}
+          className="registro-opcion"
+        />
+        <Button
+          iconName="Fotografía"
+          labelKey={t('pictureTitle')}
+          onClick={() => handleButtonClick('fotografia')}
+          className="registro-opcion"
+        />
 
-        {/* Campo Fecha de Nacimiento */}
-        <div className="form-group">
-          <label htmlFor="birthdate">{t('registro.birthdateLabel')}:</label>
-          <div className="date-input-container">
-            <input
-              type="date"
-              id="birthdate"
-              name="birthdate"
-              value={values.birthdate}
-              onChange={handleInputChange}
-              className="form-input"
-              required
-            />
-          </div>
-        </div>
+        <button type="submit" className="boton">{t('RegistrarBoton')}</button>
+      </div>
 
-        {/* Campo Email */}
-        <div className="form-group">
-          <label htmlFor="email">{t('registro.emailLabel')}:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={values.email}
-            onChange={handleInputChange}
-            className="form-input"
-            required
-          />
-        </div>
-
-        {/* Campo Contraseña */}
-        <div className="form-group">
-          <label htmlFor="password">{t('registro.passwordLabel')}:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={values.password}
-            onChange={handleInputChange}
-            className="form-input"
-            required
-            minLength={6} // en TS se usa número, no string
-          />
-        </div>
-
-        {/* Botón de Continuar */}
-        <button type="submit" className="submit-button">
-          {t('registro.submitButton')}
-        </button>
-      </form>
-
-      {/* Botón de Volver */}
-      <button onClick={handleBack} className="back-button">
-        {t('registro.backButton')}
+      <button className="back-button" onClick={() => navigate('/botones')}>
+        <img src={getSvgUrl('Retroceder')} alt="Regresar" className="button-icon" />
       </button>
     </div>
   );
-}
+};
 
-export default Registro;  
+export default Registro;
